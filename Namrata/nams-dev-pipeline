@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git clone') {
+            steps {
+               git branch: 'main', credentialsId: '255ae7c9-8c9c-4b57-a5aa-70bcb1a6f22a', url: 'https://github.com/namrata-aatmani/productionteam.git' 
+            }
+        }
+        stage('Dev-ECR login') {
+            steps {
+              sh '''aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com
+              '''
+            }
+        }
+        stage('Dev-Docker Build image') {
+            steps {
+              sh '''docker build -t nams-nodejs-image:latest .'''
+            }
+        }
+        stage('Dev-Docker tag image to ECR') {
+            steps {
+              sh '''docker tag nams-nodejs-image:latest 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:latest'''
+            }
+        }
+        stage('Dev-Docker Push image to ECR') {
+            steps {
+              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:latest'''
+            }
+        }
+    }
+    //Send slack alert
+    post {
+            failure {
+               slackSend channel: 'jenkins-alert', message: 'image push to ECR failed', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'd09c5ebe-92ab-4b3f-866d-3e34c60ef35b'
+            }
+      
+           success {
+               slackSend channel: 'jenkins-alert', message: 'image push to ECR successful', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'd09c5ebe-92ab-4b3f-866d-3e34c60ef35b' 
+            }
+      
+    }
+}
+
