@@ -21,14 +21,14 @@ pipeline {
         stage('Dev-Docker tag image to ECR') {
             steps {
               sh '''docker tag nams-nodejs-image:dev-01 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)
-              docker tag nams-nodejs-image:dev-01 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest '''
+              docker tag nams-nodejs-image:dev-01 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest'''
               
             }
         }
         stage('Dev-Docker Push image to ECR') {
             steps {
               sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
-              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest'''
+              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest1'''
             }
         }
     }
