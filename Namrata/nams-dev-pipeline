@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-               git branch: 'main', credentialsId: '255ae7c9-8c9c-4b57-a5aa-70bcb1a6f22a', url: 'https://github.com/namrata-aatmani/productionteam.git' 
+               git branch: 'main', credentialsId: '255ae7c9-8c9c-4b57-a5aa-70bcb1a6f22a', url: 'https://github.com/namrata-aatmani/productionteam1.git' 
             }
         }
         stage('Dev-ECR login') {
