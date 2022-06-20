@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Git clone') {
             steps {
-               git branch: 'main', credentialsId: '255ae7c9-8c9c-4b57-a5aa-70bcb1a6f22a', url: 'https://github.com/namrata-aatmani/productionteam.git' 
+               git branch: 'main', credentialsId: '255ae7c9-8c9c-4b57-a5aa-70bcb1a6f22a', url: 'https://github.com/namrata-aatmani/productionteam1.git' 
             }
         }
         stage('Dev-ECR login') {
@@ -28,7 +28,7 @@ pipeline {
         stage('Dev-Docker Push image to ECR') {
             steps {
               sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
-              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest1'''
+              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest'''
             }
         }
     }
