@@ -11,14 +11,14 @@ pipeline {
         }
     stage('Docker pull latest') {
             steps {
-                 sh 'docker pull 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:latest'
+                 sh 'docker pull 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1'
                  
                  
             }
         }
     stage('Docker tag latest image') {
             steps {
-                sh 'docker tag 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:QAlatest'
+                sh 'docker tag 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:QAlatest'
                  
                  
             }
