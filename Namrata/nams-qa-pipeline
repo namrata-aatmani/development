@@ -9,19 +9,19 @@ pipeline {
         }
         stage('QA-Docker pull') {
             steps {
-                sh '''docker pull 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
+                #sh '''docker pull 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
                 sh '''docker pull 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-latest'''
         }
         }
         stage('QA-Docker tag') {
             steps {
-                sh '''docker tag 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h) '''
+                #sh '''docker tag 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h) '''
                  sh '''docker tag 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:qa-latest'''
         }
         }
          stage('QA-Docker push to ECR') {
             steps {
-                sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
+                #sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:$(git log -1 --format=%h)'''
                 sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:qa-latest'''
         }
         }
