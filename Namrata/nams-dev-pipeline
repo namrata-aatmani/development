@@ -36,7 +36,7 @@ pipeline {
     post {
           
             failure {
-               sh ''' exit 1'''
+               exit 1
                slackSend channel: 'jenkins-alert', message: 'Pushing of dev-image to ECR failed', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'd09c5ebe-92ab-4b3f-866d-3e34c60ef35b'
             }
       
