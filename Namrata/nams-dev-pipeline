@@ -15,17 +15,17 @@ pipeline {
         }
         stage('Dev-Docker Build image') {
             steps {
-              sh '''docker build -t nams-nodejs-image:latest .'''
+              sh '''docker build -t nams-nodejs-image:dev-01 .'''
             }
         }
         stage('Dev-Docker tag image to ECR') {
             steps {
-              sh '''docker tag nams-nodejs-image:latest 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:latest'''
+              sh '''docker tag nams-nodejs-image:dev-01 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-01'''
             }
         }
         stage('Dev-Docker Push image to ECR') {
             steps {
-              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:latest'''
+              sh '''docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/nams-nodejs-image:dev-01'''
             }
         }
     }
