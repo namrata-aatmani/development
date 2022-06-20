@@ -39,11 +39,11 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                #sh "docker tag ${IMAGE_REPO_NAME}:${IMAGE_TAG} ${REPOSITORY_URI}:$IMAGE_TAG"
-                sh '''docker tag veer-project:latest ${REPOSITORY_URI}:$(git log -1 --format=%h)
-                       docker tag veer-project:latest ${REPOSITORY_URI}:dev1''' 
-                #sh "docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/${IMAGE_REPO_NAME}:${IMAGE_TAG}"
-                
+                sh '''docker tag veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:$(git log -1 --format=%h)
+                       docker tag veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1'''           
+                sh '''docker push 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:$(git log -1 --format=%h)'''
+                sh '''docker push 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1'''
+
          }
         }
       }
