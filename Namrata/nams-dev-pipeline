@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Dev-Docker Build image') {
             steps {
-              sh '''docker build -t nams-nodejs-image:dev-01 .'''
+              sh '''docker build -t nams-nodejs-image --build-arg GIT_COMMIT=$(git log -1 --format=%h) .'''
             }
         }
         stage('Dev-Docker tag image to ECR') {
