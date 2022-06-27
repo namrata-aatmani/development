@@ -1,0 +1,30 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Git clone') {
+            steps {
+                git branch: 'main', url: 'https://github.com/namrata-aatmani/productionteam.git'
+            }
+        }
+        stage('aws ecr') {
+            steps {
+                sh'''aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com
+                docker build -t basu-project-docker-image:dev.$(git log -1 --format=%h) --build-arg GIT_COMMIT=$(git log -1 --format=%h) .
+                docker tag basu-project-docker-image:dev.01 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/basu-project-docker-image:dev.$(git log -1 --format=%h)
+                docker push 827718379108.dkr.ecr.ap-southeast-1.amazonaws.com/basu-project-docker-image:dev.$(git log -1 --format=%h)'''
+                    }
+        }
+        
+    }
+    //Send slack alert
+    post {
+          
+            failure {
+               slackSend channel: 'jenkins-alert', message: 'Basavaraj Pushing of dev-image to ECR is failed', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'slack-secret-token'
+            }
+            success {
+               slackSend channel: 'jenkins-alert', message: 'Basavaraj Pushing of dev-image to ECR is successful', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'slack-secret-token' 
+            }
+        }
+}
