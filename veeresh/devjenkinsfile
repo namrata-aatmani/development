@@ -31,7 +31,7 @@ pipeline {
     stage('Pushing to ECR') {
      steps{  
          script {
-                sh '''docker tag veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-projec:$(git log -1 --format=%h)
+                sh '''docker tag veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:$(git log -1 --format=%h)
                        docker tag veer-project:latest 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1'''           
                 sh '''docker push 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:$(git log -1 --format=%h)'''
                 sh '''docker push 443244066224.dkr.ecr.ap-southeast-1.amazonaws.com/veer-project:dev1'''
