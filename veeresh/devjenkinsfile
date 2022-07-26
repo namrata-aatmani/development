@@ -46,6 +46,9 @@ pipeline {
        
       }
     }
+    
+   }
+  }
     post {
         failure {
           slackSend channel: 'jenkins-alert', message: 'job success', teamDomain: 'aatmaaniacademy', tokenCredentialId: 'b98e08a6-773d-42b3-adc3-051b691ba64d'
