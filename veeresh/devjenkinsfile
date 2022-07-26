@@ -42,7 +42,7 @@ pipeline {
       stage('helm run') {
       steps{
           script {
-                sh 'helm upgrade --install --set image.tag=$git_commit nodejss nodejs -n dev -f values-dev.yaml'
+                sh 'helm upgrade --install --set image.tag=$git_commit nodejss nodejs -n dev -f dev.yaml'
        
       }
     }
