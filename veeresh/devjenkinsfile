@@ -14,7 +14,7 @@ pipeline {
         
         stage('Cloning Git') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'cc77ced0-95dd-4ff3-83cc-e993344ec312', url: 'https://github.com/namrata-aatmani/productionteam.git']]])     
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'cc77ced0-95dd-4ff3-83cc-e993344ec312', url: 'https://github.com/namrata-aatmani/team.git']]])     
             }
         }
   
