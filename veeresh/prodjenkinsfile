@@ -30,6 +30,18 @@ pipeline {
 
             }
         }
+       stage ('Deployment - Creating pod using Helm') {
+            steps{
+                sh ''' 
+                pwd
+	        aws eks update-kubeconfig --name veeresh-new --region ap-southeast-1
+	        kubectl get pods -n qa
+                helm ls -n prod 
+                helm install prod nodejsproject -n prod -f prod.yaml
+                '''
+            }
+        
+       }
     }
     post {
         failure {
